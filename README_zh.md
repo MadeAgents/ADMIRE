@@ -3,71 +3,71 @@
 <h1 align="center">Adaptive Milestone Reward for GUI Agents</h1>
 
 <p align="center">
-  <img src="framework.jpg" alt="ADMIRE Framework" width="100%">
+  <img src="framework.jpg" alt="ADMIRE 框架" width="100%">
 </p>
 
 <p align="center">
-  <a href="README_zh.md">中文</a> | English
+  中文 | <a href="README.md">English</a>
 </p>
 
-ADMIRE is a reinforcement learning framework that uses **adaptive milestone rewards** to train GUI agents. It automatically generates task milestones from successful trajectories and provides dense process rewards to guide agent learning.
+ADMIRE 是一个基于**自适应里程碑奖励**的强化学习框架，用于训练 GUI 自动化 Agent。该框架从成功轨迹中自动生成任务里程碑，并提供密集的过程奖励来指导 Agent 学习。
 
-## Installation
+## 安装
 
-### Requirements
+### 环境要求
 
 - Python 3.11
 - PyTorch 2.2.0
 - CUDA 12.6
-- 8× A800(A100) GPUs (recommended)
+- 8× GPU（推荐）
 
-### Setup
+### 安装步骤
 
 ```bash
-# Create conda environment
+# 创建 conda 环境
 conda create -n admire python=3.11 -y
 conda activate admire
 
-# Install PyTorch
+# 安装 PyTorch
 pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu126
 
-# Clone repository
+# 克隆项目
 git clone https://github.com/your-repo/ADMIRE.git
 cd ADMIRE
 
-# Install verl
+# 安装 verl
 mkdir 3rdparty && git clone https://github.com/volcengine/verl 3rdparty/verl
 cd 3rdparty/verl && pip install -e . && cd ../..
 
-# Install android_world
+# 安装 android_world
 git clone https://github.com/google-research/android_world 3rdparty/android_world
 cd 3rdparty/android_world && pip install -e . && cd ../..
 
-# Install ADMIRE
+# 安装 ADMIRE
 pip install -e .
 
-# Install additional dependencies
+# 安装其他依赖
 pip install swanlab scikit-image spacy ray
 python -m spacy download en_core_web_sm
 
-# (Optional) Login to SwanLab for experiment tracking
+# (可选) 登录 SwanLab 用于实验跟踪
 swanlab login -k "your-api-key"
 ```
 
-### Android Environment
+### Android 环境配置
 
-Follow [AndroidWorld setup guide](3rdparty/android_world/README.md) to configure the Android emulator.
+参考 [AndroidWorld 配置指南](3rdparty/android_world/README.md) 配置 Android 模拟器。
 
-## Quick Start
+## 快速开始
 
-### 1. Start Ray Cluster
+### 1. 启动 Ray 集群
 
 ```bash
 ray stop
 ray start --head --port=6379 --dashboard-port=8265
 ```
 
-### 2. Start Environment Server
+### 2. 启动环境服务器
 
 ```bash
 python src/hammer_server/gradio_web_server.py \
@@ -77,13 +77,13 @@ python src/hammer_server/gradio_web_server.py \
     --concurrency-limit 8
 ```
 
-### 3. Run Training
+### 3. 运行训练
 
 ```bash
 bash run_hrpo_stepwise.sh
 ```
 
-Or with custom config:
+或使用自定义配置：
 
 ```bash
 export HYDRA_FULL_ERROR=1
@@ -95,52 +95,52 @@ python -m hammer_trainer_stepwise.main_ppo \
     trainer.n_gpus_per_node=8
 ```
 
-## Project Structure
+## 项目结构
 
 ```
 ADMIRE/
 ├── src/
-│   ├── hammer_agent/              # Agent implementation
-│   ├── hammer_server/             # Environment server (Gradio)
-│   ├── hammer_trainer/            # Base trainer
-│   └── hammer_trainer_stepwise/   # Stepwise RL trainer with milestone rewards
-├── scripts/                       # Training configs
-│   ├── config_stepwise_32.yaml    # Default stepwise config
-│   └── config_grpo.yaml           # GRPO config
+│   ├── hammer_agent/              # Agent 实现
+│   ├── hammer_server/             # 环境服务器 (Gradio)
+│   ├── hammer_trainer/            # 基础训练器
+│   └── hammer_trainer_stepwise/   # 步级 RL 训练器（含里程碑奖励）
+├── scripts/                       # 训练配置
+│   ├── config_stepwise_32.yaml    # 默认步级训练配置
+│   └── config_grpo.yaml           # GRPO 配置
 ├── 3rdparty/
-│   ├── verl/                      # RL training framework
-│   └── android_world/             # Android environment
+│   ├── verl/                      # RL 训练框架
+│   └── android_world/             # Android 环境
 └── notebooks/
-    └── visualize_step.ipynb       # Trajectory visualization
+    └── visualize_step.ipynb       # 轨迹可视化
 ```
 
-## Configuration
+## 配置说明
 
-Key parameters in `scripts/config_stepwise_32.yaml`:
+`scripts/config_stepwise_32.yaml` 中的关键参数：
 
 ```yaml
-# Environment
+# 环境配置
 env:
-  src: [" "]                       
+  src: [" "] 
   max_envs: [16]
   max_steps: 30
 
-# Model
+# 模型配置
 actor_rollout_ref:
   model:
     path: "Qwen/Qwen2.5-VL-7B-Instruct"
   rollout:
-    n: 8                           # Number of rollouts per prompt
+    n: 8                           # 每个 prompt 的 rollout 数量
 
-# Training
+# 训练配置
 trainer:
   total_epochs: 20
   n_gpus_per_node: 8
 
-# Milestone Reward
+# 里程碑奖励
 milestone_reward:
   enable: true
-  threshold: 0.75                  # Similarity threshold for matching
+  threshold: 0.75                  # 匹配的相似度阈值
   weight: 0.3
 
 process_reward:
@@ -149,13 +149,13 @@ process_reward:
   decay_gamma: 0.99
 ```
 
-## Reward Components
+## 奖励机制
 
-The total reward is computed as:
+总奖励计算公式：
 
 $$\mathcal{R}_{total} = \mathcal{R}_{outcome} + \eta \cdot \mathcal{R}_{format} + \lambda(t) \cdot \mathcal{R}_{mil}$$
 
-Configure via:
+配置方式：
 
 ```yaml
 milestone_reward:
@@ -168,11 +168,11 @@ process_reward:
   weight: 1.0
 ```
 
-## License
+## 许可证
 
-Apache License 2.0. See [LICENSE](LICENSE).
+Apache License 2.0，详见 [LICENSE](LICENSE)。
 
-## Acknowledgments
+## 致谢
 
 - [verl](https://github.com/volcengine/verl) - ByteDance Seed Team
 - [AndroidWorld](https://github.com/google-research/android_world) - Google Research
