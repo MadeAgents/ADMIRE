@@ -10,7 +10,7 @@
   中文 | <a href="README.md">English</a>
 </p>
 
-ADMIRE 是一个基于**自适应里程碑奖励**的强化学习框架，用于训练 GUI 自动化 Agent。该框架从成功轨迹中自动生成任务里程碑，并提供密集的过程奖励来指导 Agent 学习。
+ADMIRE 是一个基于**自适应里程碑奖励**的强化学习框架，用于训练 GUI 自动化 Agent。该框架从成功轨迹中自动生成任务里程碑，并提供密集的奖励信号来指导 Agent 学习。
 
 ## 安装
 
@@ -177,3 +177,4 @@ Apache License 2.0，详见 [LICENSE](LICENSE)。
 - [verl](https://github.com/volcengine/verl) - ByteDance Seed Team
 - [AndroidWorld](https://github.com/google-research/android_world) - Google Research
 - [Qwen2.5-VL](https://github.com/QwenLM/Qwen2.5-VL) - Alibaba
+
