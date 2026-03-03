@@ -10,7 +10,7 @@
   <a href="README_zh.md">中文</a> | English
 </p>
 
-ADMIRE is a reinforcement learning framework that uses **adaptive milestone rewards** to train GUI agents. It automatically generates task milestones from successful trajectories and provides dense process rewards to guide agent learning.
+ADMIRE is a reinforcement learning framework that uses **adaptive milestone rewards** to train GUI agents. It automatically generates task milestones from successful trajectories and provides dense rewards to guide agent learning.
 
 ## Installation
 
@@ -177,3 +177,4 @@ Apache License 2.0. See [LICENSE](LICENSE).
 - [verl](https://github.com/volcengine/verl) - ByteDance Seed Team
 - [AndroidWorld](https://github.com/google-research/android_world) - Google Research
 - [Qwen2.5-VL](https://github.com/QwenLM/Qwen2.5-VL) - Alibaba
+
