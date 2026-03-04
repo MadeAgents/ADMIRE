@@ -179,6 +179,7 @@ Apache License 2.0，详见 [LICENSE](LICENSE)。
 - [Qwen2.5-VL](https://github.com/QwenLM/Qwen2.5-VL) - Alibaba
 
 ## 引用
+[论文链接](https://arxiv.org/pdf/2602.11524)
 ```
 @article{zheng2026adaptive,
   title={Adaptive Milestone Reward for GUI Agents},
@@ -187,4 +188,5 @@ Apache License 2.0，详见 [LICENSE](LICENSE)。
   year={2026}
 }
 ``` 
+
 
