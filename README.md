@@ -178,14 +178,4 @@ Apache License 2.0. See [LICENSE](LICENSE).
 - [AndroidWorld](https://github.com/google-research/android_world) - Google Research
 - [Qwen2.5-VL](https://github.com/QwenLM/Qwen2.5-VL) - Alibaba
 
-## Citation
-[Paper Link](https://arxiv.org/pdf/2602.11524)
-```
-@article{zheng2026adaptive,
-  title={Adaptive Milestone Reward for GUI Agents},
-  author={Zheng, Congmin and Mo, Xiaoyun and Ma, Xinbei and Lin, Qiqiang and Zhao, Yin and Zhu, Jiachen and Lou, Xingyu and Wang, Jun and Wang, Zhaoxiang and Liu, Weiwen and others},
-  journal={arXiv preprint arXiv:2602.11524},
-  year={2026}
-}
-``` 
 
